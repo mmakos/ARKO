@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_native_dialog.h>
 
-void median( char *input, char *output, unsigned int width, unsigned int height );
+
+int median( char *output, char *input, unsigned int width, unsigned int height );
 
 typedef struct
 {
@@ -75,13 +79,41 @@ int main( int argc, char *argv[] )
 	memcpy( result, &bfType, sizeof( unsigned short ) );
 	memcpy( result + 2, &header, sizeof( BMPHeader ) );
 
-	median( image, result + sizeof( BMPHeader ) + sizeof( unsigned short ), width, height );
+	printf( "%d\n", median( result + sizeof( BMPHeader ) + sizeof( unsigned short ), image, width, height ) );
 
 	file = fopen( argv[ 2 ], "wb" );
 	if( file == 0 )
 		return error( -2 );
 	if( fwrite( result, 1, size, file ) != size )
 		return error( -4 );
+
+
+	//----------GRAFA----------
+	ALLEGRO_DISPLAY * display = NULL;
+	ALLEGRO_BITMAP * bitmap = NULL;
+
+	if( !al_init() )
+		al_show_native_message_box( display, "Error", "Error", "Failed to initialize allegro!", NULL, ALLEGRO_MESSAGEBOX_ERROR );
+	if( !al_init_image_addon() )
+		al_show_native_message_box( display, "Error", "Error", "Failed to initialize al_init_image_addon!", NULL, ALLEGRO_MESSAGEBOX_ERROR );
+
+	display = al_create_display( width, height );
+	if( !display )
+		al_show_native_message_box( display, "Error", "Error", "Failed to initialize display!", NULL, ALLEGRO_MESSAGEBOX_ERROR );
+
+	bitmap = al_load_bitmap( argv[ 2 ] );
+	if( !bitmap ){
+		al_show_native_message_box( display, "Error", "Error", "Failed to load bitmap!", NULL, ALLEGRO_MESSAGEBOX_ERROR );
+		al_destroy_display( display );
+	}
+	al_draw_bitmap( bitmap, 0, 0, 0 );
+
+	al_flip_display();
+	al_rest( 10 );
+
+	al_destroy_display( display );
+	al_destroy_bitmap( bitmap );
+	//---------------------
 
 	fclose( file );
 
