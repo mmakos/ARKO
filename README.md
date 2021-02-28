@@ -1,4 +1,4 @@
-# Mediane filter
+# Median filter
 ## Written in assembly
 
 Program takes BMP image and applies median filter with 3x3 window to it.
