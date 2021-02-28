@@ -10,3 +10,6 @@ There are two versions available:
 Executing: ./median input.bmp output.bmp
 
 You can see some examples in img folder (before and after filtering).
+
+![Original image](https://raw.githubusercontent.com/mmakos/ARKO/master/img/dziecko.bmp)
+![Image after filtering](https://raw.githubusercontent.com/mmakos/ARKO/master/img/dzieckoOut.bmp)
