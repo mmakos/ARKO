@@ -1,7 +1,9 @@
-CC = gcc
+CC = cl.exe
 CFLAGS = -Wall -m32
 
-all: main.o median.o
+all: compile clean
+
+compile: main.o median.o
 	$(CC) $(CFLAGS) -o median.exe main.o median.o
 
 median.o: median.asm
