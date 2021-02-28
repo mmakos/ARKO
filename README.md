@@ -5,7 +5,7 @@ Program takes BMP image and applies median filter with 3x3 window to it.
 
 There are two versions available:
 * First is written in MIPS architecture (32 registers, no stack usage). You need [Mars simulator software](http://courses.missouristate.edu/kenvollmar/mars/) to run this.
-* Second is written for linux x86 NASM style assembly. It can be compiled by 'make' command (executing makefile). Make sure you have NASM installed and you have 32-bit libraries. You can satisfy this requirements with: `spt-get install nasm` and `apt-get install gcc-multilib`/
+* Second is written for linux x86 NASM style assembly. It can be compiled by `make` command (executing makefile). Make sure you have NASM installed and you have 32-bit libraries. You can satisfy those requirements with: `apt-get install nasm` and `apt-get install gcc-multilib`
 
 Executing: ./median input.bmp output.bmp
 
