@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+// #define ALLEGRO
+
+#ifdef ALLEGRO
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
-
+#endif // ALLEGRO
 
 int median( char *output, char *input, unsigned int width, unsigned int height );
 
@@ -87,7 +91,7 @@ int main( int argc, char *argv[] )
 	if( fwrite( result, 1, size, file ) != size )
 		return error( -4 );
 
-
+	#ifdef ALLEGRO
 	//----------GRAFA----------
 	ALLEGRO_DISPLAY * display = NULL;
 	ALLEGRO_BITMAP * bitmap = NULL;
@@ -114,6 +118,7 @@ int main( int argc, char *argv[] )
 	al_destroy_display( display );
 	al_destroy_bitmap( bitmap );
 	//---------------------
+	#endif // ALLEGRO
 
 	fclose( file );
 
